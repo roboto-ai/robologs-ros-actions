@@ -1,7 +1,6 @@
 ### get-videos
 
-get-videos is an action that extracts videos from a rosbag file. It is provided as part of the robologs-ros-utils command 
-line utilities which are preinstalled in the robologs-ros-actions docker image.
+get-videos is an action that extracts videos from a rosbag file. It is provided as part of the robologs-ros-utils command line utilities which are preinstalled in the robologs-ros-actions docker image.
 
 ### Run command
 
