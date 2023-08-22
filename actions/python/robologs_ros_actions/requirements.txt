@@ -1,5 +1,5 @@
 numpy==1.23.1
-robologs-ros-utils==0.1.1a33
+robologs-ros-utils==0.1.1a34
 boto3
 opencv-python
 uuid
