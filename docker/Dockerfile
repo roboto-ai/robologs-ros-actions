@@ -41,8 +41,7 @@ RUN mkdir -p ${FUNCTION_DIR} ${INPUT_DIR} ${OUTPUT_DIR}
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Download the mcap CLI binary using wget
-RUN wget https://github.com/foxglove/mcap/releases/latest/download/mcap-linux-amd64 -O /usr/local/bin/mcap
-
+RUN wget https://github.com/foxglove/mcap/releases/download/releases%2Fmcap-cli%2Fv0.0.32/mcap-linux-amd64 -O /usr/local/bin/mcap
 # Make the binary executable
 RUN chmod +x /usr/local/bin/mcap
 
