@@ -1,0 +1,9 @@
+.venv
+.mypy_cache
+**/*.egg-info
+**/.mypy_cache/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache
+**/dist/
+**/output-*

@@ -1,0 +1,13 @@
+{
+    "name": "rosbag_to_mcap",
+    "description": "This Action converts rosbag file to mcap.",
+    "tags": [
+        "ros",
+        "ros2",
+        "mcap",
+        "transform"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/rosbag_to_mcap"
+    }
+}

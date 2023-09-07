@@ -1,0 +1,24 @@
+{
+    "name": "db3_info",
+    "description": "This Action saves ros2 db3 metadata in a json file.",
+    "parameters": [
+        {
+            "name": "HIDDEN",
+            "required": false,
+            "description": "Hide metadata json files.",
+            "default": "True"
+        }
+    ],
+    "container_parameters": {
+        "entry_point": [],
+        "workdir": "",
+        "command": []
+    },
+    "tags": [
+        "ros2",
+        "transform"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/db3_info"
+    }
+}

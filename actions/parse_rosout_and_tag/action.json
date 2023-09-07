@@ -1,0 +1,24 @@
+{
+    "name": "parse_rosout_and_tag",
+    "description": "Action to parse /rosout topic and apply a tag if substring is found.",
+    "compute_requirements": {
+        "vCPU": 512,
+        "memory": 1024,
+        "storage": 21
+    },
+    "parameters": [
+        {
+            "name": "KEYWORD_DICT",
+            "required": true,
+            "description": "Dictionary with keys and values. The key specifies the tag that will be applied to the datasets if /rosout contains the value."
+        }
+    ],
+    "tags": [
+        "ros",
+        "tag",
+        "rosout"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/parse_rosout_and_tag"
+    }
+}

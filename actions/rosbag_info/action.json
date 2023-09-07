@@ -1,0 +1,35 @@
+{
+    "name": "rosbag_info",
+    "description": "This Action saves rosbag metadata in a json file.",
+    "parameters": [
+        {
+            "name": "SPLIT",
+            "required": false,
+            "description": "Save per-rosbag metadata json file next to each rosbag. The naming convention is {rosbag_name}.json.",
+            "default": "True"
+        },
+        {
+            "name": "HIDDEN",
+            "required": false,
+            "description": "Hide metadata json files.",
+            "default": "True"
+        },
+        {
+            "name": "FILE_NAME",
+            "required": "false",
+            "description": "Output file name. Only relevant if --split is not used"
+        }
+    ],
+    "container_parameters": {
+        "entry_point": [],
+        "workdir": "",
+        "command": []
+    },
+    "tags": [
+        "ros",
+        "transform"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/rosbag_info"
+    }
+}

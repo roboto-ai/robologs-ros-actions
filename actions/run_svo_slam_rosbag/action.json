@@ -1,0 +1,24 @@
+{
+    "name": "run_svo_slam_rosbag",
+    "description": "This Action runs SVO SLAM on a rosbag image topic",
+    "parameters": [
+        {
+            "name": "TOPIC",
+            "required": true,
+            "description": "Image topic to run SVO"
+        }
+    ],
+    "container_parameters": {
+        "entry_point": [],
+        "workdir": "",
+        "command": []
+    },
+    "tags": [
+        "ros",
+        "algorithm",
+        "slam"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/run_svo_slam_rosbag"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "library": "mcap go v1.0.1",
+    "profile": "ros1",
+    "messages": 7,
+    "duration": "113.322827ms",
+    "start": "2023-10-09T12",
+    "end": "2023-10-09T12",
+    "compression": "",
+    "attachments": 0,
+    "metadata": "0",
+    "channels": [
+        {
+            "ID": 0,
+            "Topic": "/dvs/image_raw",
+            "MessageCount": 4,
+            "Frequency": 35.3,
+            "SchemaName": "sensor_msgs/Image",
+            "Encoding": "ros1msg"
+        },
+        {
+            "ID": 1,
+            "Topic": "/dvs1/image_raw",
+            "MessageCount": 3,
+            "Frequency": 26.47,
+            "SchemaName": "sensor_msgs/Image",
+            "Encoding": "ros1msg"
+        }
+    ]
+}

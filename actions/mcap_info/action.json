@@ -1,0 +1,24 @@
+{
+    "name": "mcap_info",
+    "description": "This Action saves mcap metadata in a json file.",
+    "parameters": [
+        {
+            "name": "HIDDEN",
+            "required": false,
+            "description": "Hide metadata json files.",
+            "default": "True"
+        }
+    ],
+    "container_parameters": {
+        "entry_point": [],
+        "workdir": "",
+        "command": []
+    },
+    "tags": [
+        "ros2",
+        "mcap"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/mcap_info"
+    }
+}

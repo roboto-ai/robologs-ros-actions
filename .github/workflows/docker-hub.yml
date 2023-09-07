@@ -18,7 +18,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
     - name: Build the Docker image
-      run: docker build -t ${{ env.IMAGE_NAME }} --file docker/Dockerfile .
+      run: docker build -t ${{ env.IMAGE_NAME }} --file docker/Dockerfile_ros .
 
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -49,6 +49,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          file: docker/Dockerfile
+          file: docker/Dockerfile_ros
           network: host
 

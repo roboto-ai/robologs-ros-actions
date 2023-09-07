@@ -1,0 +1,19 @@
+# Use ros:iron-ros-base as base image
+FROM ros:iron-ros-base
+
+# Install build dependencies and create necessary directories
+RUN apt-get update && \
+    apt-get install -y \
+    g++ \
+    make \
+    cmake \
+    libcurl4-openssl-dev \
+    python3 \
+    python3-pip \
+    wget && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    ln -s /usr/bin/python3 /usr/bin/python
+
+# Ensure scripts are executable
+RUN chmod 777 /opt/ros/iron/setup.sh && . /opt/ros/iron/setup.sh
