@@ -19,6 +19,6 @@
         "slam"
     ],
     "metadata": {
-        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/run_svo_slam_rosbag"
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/run_svo_slam_rosbag"
     }
 }

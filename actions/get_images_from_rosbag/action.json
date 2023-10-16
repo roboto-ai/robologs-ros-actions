@@ -65,6 +65,6 @@
         "transform"
     ],
     "metadata": {
-        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/get_images_from_rosbag"
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/get_images_from_rosbag"
     }
 }

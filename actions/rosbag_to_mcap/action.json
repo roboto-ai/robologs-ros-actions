@@ -8,6 +8,6 @@
         "transform"
     ],
     "metadata": {
-        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/dev/actions/rosbag_to_mcap"
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/rosbag_to_mcap"
     }
 }
