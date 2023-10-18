@@ -1,13 +1,10 @@
 # What is robologs-ros-actions
 
+`robologs-ros-actions` is an open-source collection of software modules to extract, process and analyze Robot Operating System (ROS) data. These modules, referred to as Actions, are essentially containerized Python scripts, and form part of the broader [robologs](https://github.com/roboto-ai/robologs) library.
 
-`robologs-ros-actions` is an open-source toolkit offering a suite of containerized data transformation scripts specifically designed for ROS (Robot Operating System) data. These utilities, referred to as Actions, are essentially encapsulated code scripts that can be executed on a collection of files for various purposes such as data extraction, processing, and analysis.
+Actions can range from simple data transformations to more complex algorithms, accommodating a wide spectrum of requirements and use cases.
 
-These Actions can range from straightforward data transformations to more sophisticated algorithms, accommodating a wide spectrum of requirements and complexities.
-
-
-
-The package presently includes the following Actions:
+The package currently includes the following Actions:
 
 - `get_images_from_rosbag`: Extract images from a rosbag.
 - `get_videos_from_rosbag`: Extract videos from a rosbag.
@@ -32,7 +29,7 @@ The package presently includes the following Actions:
 
 # Quickstart
 
-Try the `get_images_from_rosbag` Action:
+Try an Action called: `get_images_from_rosbag`:
 
 ```bash
 
@@ -40,25 +37,27 @@ Try the `get_images_from_rosbag` Action:
 git clone https://github.com/roboto-ai/robologs-ros-actions.git
 cd robologs-ros-actions/actions/get_images_from_rosbag/
 
-# 1. Set up a virtual environment for this project and install the necessary development dependencies, which includes the `roboto` CLI:
+# 1. Set up a virtual environment for this project and install dependencies, which includes the `roboto` CLI:
 ./scripts/setup.sh
 
 # 2. Build the Docker image for the Action: 
 ./scripts/build.sh
 
-# 3. Execute the Action image locally: 
+# 3. Run the Action locally: 
 ./scripts/run.sh <path-to-input-data-directory>
 
-# 4. Run the provided tests to ensure everything is set up correctly: 
+# 4. Run the provided tests to ensure everything is set up correctly:
 ./scripts/test.sh
 
-# 5. Optionally, you can deploy the Action to the Roboto Platform: 
+# 5. (Optional) Deploy the Action to the Roboto platform (see notes below):
 ./scripts/deploy.sh
 
 ```
 
+Deployment to Roboto (Step 5.) enables you to run an Action at scale on multiple datasets in the cloud, or automatically when new data gets uploaded. You can sign up for a free account at [roboto.ai](https://app.roboto.ai), and find user guides at [docs.roboto.ai](https://docs.roboto.ai/user-guides/index.html).
+
 # Community
 
-We are constantly looking to expand the capabilities of robologs-ros-actions and we welcome suggestions for new Actions. If you have ideas or need assistance, feel free to join our discussion on [Discord](https://discord.gg/rvXqP6EjwF).
+We're constantly looking to expand the capabilities of `robologs-ros-actions` and welcome suggestions for new Actions. If you have ideas or need assistance, feel free to join our discussion on [Discord](https://discord.gg/rvXqP6EjwF).
 
-Your contributions and suggestions are not only encouraged but also form an integral part of this open-source initiative. Let's collaborate to make robologs-ros-actions more versatile and beneficial for everyone in the ROS community!
+Your contributions and suggestions are not only encouraged but also form an integral part of this open-source initiative. Let's collaborate to make `robologs-ros-actions` more versatile and beneficial for everyone in the ROS community!
