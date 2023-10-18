@@ -32,7 +32,7 @@ The package presently includes the following Actions:
 
 # Quickstart
 
-Try the 'get_images_from_rosbag' Action:
+Try the `get_images_from_rosbag` Action:
 
 ```bash
 
