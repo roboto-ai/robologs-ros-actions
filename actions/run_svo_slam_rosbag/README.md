@@ -1,13 +1,13 @@
 # run_svo_slam_rosbag
 
-This Action runs SVO SLAM on a rosbag.=
+This Action runs SVO SLAM on a rosbag.
 
 ## Getting started
 
 1. Install the `roboto` CLI into a Python virtual environment specific to this project: `./scripts/setup.sh`
 2. Build Docker image: `./scripts/build.sh`
 3. Run Action image locally: `./scripts/run.sh`
-4. Deploy to Roboto Platform: `./scripts/deploy.sh`
+4. (Optional) Deploy to Roboto platform: `./scripts/deploy.sh`
 
 ## Action configuration file
 
