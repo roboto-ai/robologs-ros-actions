@@ -16,7 +16,7 @@ The package currently includes the following Actions:
 - `rosbag_to_csv`: Convert a rosbag to a csv file.
 - `rosbag_to_mcap`: Convert a rosbag to a mcap file.
 
-# Pre-requisites
+# Prerequisites
 
 ## Install Docker
 - [Install Docker on Linux](https://docs.docker.com/desktop/install/linux-install/)
