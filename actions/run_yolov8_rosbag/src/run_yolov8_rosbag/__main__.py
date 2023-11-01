@@ -13,7 +13,18 @@ from robologs_ros_utils.utils import file_utils
 from ultralytics import YOLO
 
 
-ALLOWED_MODELS = ["yolov8n", "yolov8s", "yolov8m", "yolov8l", "yolov8x"]
+ALLOWED_MODELS = [
+    "yolov8n",
+    "yolov8s",
+    "yolov8m",
+    "yolov8l",
+    "yolov8x",
+    "yolov8n-seg",
+    "yolov8s-seg",
+    "yolov8m-seg",
+    "yolov8l-seg",
+    "yolov8x-seg",
+]
 
 
 def get_images(
@@ -164,7 +175,6 @@ def run_detector_on_folders(
         # Process topic directories inside the bag's output folder
         if os.path.isdir(bag_path):
             for topic_dir in os.listdir(bag_path):
-
                 # Create temporary directory if needed
                 if save_video:
                     os.makedirs(temp_dir, exist_ok=True)
