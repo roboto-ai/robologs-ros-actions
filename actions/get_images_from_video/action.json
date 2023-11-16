@@ -1,0 +1,19 @@
+{
+    "name": "get_images_from_video",
+    "description": "This Action extracts images from common video formats. MP4, AVI, MOV and MKV are supported.",
+    "parameters": [
+        {
+            "name": "FRAME_RATE",
+            "required": false,
+            "description": "Frame rate at which to extract images"
+	}
+    ],
+    "compute_requirements": {
+        "vCPU": 512,
+        "memory": 1024,
+        "storage": 21
+    },
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/get_images_from_video"
+    }
+}

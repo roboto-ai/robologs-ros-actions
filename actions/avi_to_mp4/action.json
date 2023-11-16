@@ -1,0 +1,50 @@
+{
+    "name": "avi_to_mp4",
+    "description": "An Action to convert .avi video files to the .mp4 format.",
+    "parameters": [
+        {
+            "name": "BITRATE",
+            "required": false,
+            "description": "Set video bitrate (e.g., '1M')",
+            "default": ""
+        },
+        {
+            "name": "FRAME_RATE",
+            "required": false,
+            "description": "Set video frame rate (e.g., '24')",
+            "default": ""
+        },
+        {
+            "name": "RESOLUTION",
+            "required": false,
+            "description": "Set video resolution (e.g., '1280x720')",
+            "default": ""
+        },
+        {
+            "name": "CRF",
+            "required": false,
+            "description": "Set the Constant Rate Factor (e.g., '23')",
+            "default": ""
+        },
+        {
+            "name": "PRESET",
+            "required": false,
+            "description": "Set encoding preset (e.g., 'slow')",
+            "default": ""
+        }
+    ],
+    "compute_requirements": {
+        "vCPU": 512,
+        "memory": 1024,
+        "storage": 21
+    },
+    "tags": [
+        "avi",
+        "mp4",
+        "ffmpeg",
+        "transform"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/avi_to_mp4"
+    }
+}
