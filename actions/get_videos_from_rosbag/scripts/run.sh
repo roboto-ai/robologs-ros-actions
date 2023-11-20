@@ -37,4 +37,5 @@ docker run --rm -it \
     -v $output_dir:/output \
     -e ROBOTO_INPUT_DIR=/input \
     -e ROBOTO_OUTPUT_DIR=/output \
+    -e ROBOTO_PARAM_SAVE_VIDEO=True \
     get_videos_from_rosbag:latest

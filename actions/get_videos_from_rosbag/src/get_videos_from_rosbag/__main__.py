@@ -115,7 +115,7 @@ def process_and_maybe_save_video(
         end_time,
     )
 
-    if save_video:
+    if save_video and folder_list:
         for folder in folder_list:
             ros_utils.get_video_from_image_folder(folder, keep_images)
 
