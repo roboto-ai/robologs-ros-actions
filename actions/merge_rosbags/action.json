@@ -1,0 +1,33 @@
+{
+    "name": "merge_rosbags",
+    "description": "This Action merges rosbags",
+    "parameters": [
+        {
+            "name": "TOPICS",
+            "required": "false",
+            "description": "Comma-separated list of topics to be merged. If empty, all topics are merged"
+        },
+        {
+            "name": "OUTPUT_FILE_NAME",
+            "required": false,
+            "description": "Output bag name with merged topics",
+            "default": "merged.bag"
+        },
+        {
+            "name": "OUTPUT_FOLDER_NAME",
+            "required": false,
+            "description": "Output folder path of merged bag file"
+        }
+    ],
+    "compute_requirements": {
+        "memory": "8192",
+        "vCPU": "2048"
+    },
+    "tags": [
+        "ros",
+        "transform"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/merge_rosbags"
+    }
+}
