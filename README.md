@@ -8,6 +8,8 @@ The package currently includes the following Actions:
 
 - `get_images_from_rosbag`: Extract images from a rosbag.
 - `get_videos_from_rosbag`: Extract videos from a rosbag.
+- `get_images_from_videos`: Extract images from common video formats.
+- `avi_to_mp4`: Convert .avi videos to the .mp4 format.
 - `run_yolov8_rosbag`: Run YOLOv8 object detection algorithm on a rosbag file.
 - `run_svo_slam_rosbag`: Run the [SVO SLAM algorithm](https://github.com/uzh-rpg/rpg_svo_pro_open) on a rosbag file.
 - `rosbag_info`: Get rosbag metadata.
@@ -15,6 +17,7 @@ The package currently includes the following Actions:
 - `db3_info`: Get db3 metadata.
 - `rosbag_to_csv`: Convert a rosbag to a csv file.
 - `rosbag_to_mcap`: Convert a rosbag to a mcap file.
+- `merge_rosbags`: Merge multiple rosbags.
 
 # Prerequisites
 
