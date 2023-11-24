@@ -6,7 +6,7 @@
             "name": "FRAME_RATE",
             "required": false,
             "description": "Frame rate at which to extract images"
-	}
+        }
     ],
     "compute_requirements": {
         "vCPU": 512,

@@ -8,5 +8,5 @@
 **/dist/
 *.swp
 *.pyc
-.idea
 output
+input

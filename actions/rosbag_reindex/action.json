@@ -1,0 +1,19 @@
+{
+    "name": "rosbag_reindex",
+    "description": "Action to reindex unindexed rosbags",
+    "parameters": [
+        {
+            "name": "FILE_PATH",
+            "required": "false",
+            "description": "Path relative to input directory of .bag file to be reindexed. If not set, all .bag will be reindexed (if necessary)."
+        }
+    ],
+    "compute_requirements": {
+        "vCPU": 512,
+        "memory": 1024,
+        "storage": 21
+    },
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/rosbag_reindex"
+    }
+}
