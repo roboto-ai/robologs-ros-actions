@@ -4,6 +4,7 @@ import os
 import pathlib
 import os.path
 import json
+import re
 from bagpy import bagreader
 from typing import Union
 
@@ -21,15 +22,17 @@ def get_bag_info_from_file_or_folder(input_path: str) -> dict:
         dict: Metadata of each rosbag found. The key is the rosbag's absolute file path.
     """
     rosbag_info_dict = dict()
+    bag_pattern = re.compile(r"\.bag(\.\d+)?$")
 
-    if str(input_path).endswith(".bag"):
+    # Check if input_path is a file that matches the pattern
+    if os.path.isfile(input_path) and bag_pattern.search(input_path):
         rosbag_info_dict[os.path.abspath(input_path)] = get_bag_info_from_file(
             input_path
         )
-    else:
+    elif os.path.isdir(input_path):
         for root, _, files in os.walk(input_path):
             for filename in files:
-                if filename.endswith(".bag"):
+                if bag_pattern.search(filename):
                     full_path = os.path.join(root, filename)
                     rosbag_info_dict[
                         os.path.abspath(full_path)
@@ -66,7 +69,9 @@ def get_bag_info_from_file(rosbag_path: str) -> dict:
     if not os.path.exists(rosbag_path):
         raise FileNotFoundError(f"{rosbag_path} does not exist.")
 
-    if not rosbag_path.endswith(".bag"):
+    bag_pattern = re.compile(r"\.bag(\.\d+)?$")
+
+    if not bag_pattern.search(rosbag_path):
         raise ValueError(f"{rosbag_path} is not a rosbag.")
 
     try:
