@@ -7,13 +7,13 @@
         "start_time": 1649764528.0711465,
         "topics": [
             {
-                "Frequency": 40.00442553840871,
+                "Frequency": "44",
                 "Message Count": 10,
                 "Topics": "/alphasense/cam0/image_raw",
                 "Types": "sensor_msgs/Image"
             },
             {
-                "Frequency": 40.00442553840871,
+                "Frequency": "44",
                 "Message Count": 10,
                 "Topics": "/alphasense/cam1/image_raw",
                 "Types": "sensor_msgs/Image"

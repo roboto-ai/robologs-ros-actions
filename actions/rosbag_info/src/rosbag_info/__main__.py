@@ -5,6 +5,7 @@ import pathlib
 import os.path
 import json
 import re
+import math
 from bagpy import bagreader
 from typing import Union
 
@@ -41,18 +42,42 @@ def get_bag_info_from_file_or_folder(input_path: str) -> dict:
     return rosbag_info_dict
 
 
-def convert_nan_values_to_string(input_dict: dict) -> dict:
+def calculate_frequency(input_dict: dict, start_ts_s: float, end_ts_s: float) -> dict:
     """
-    Convert all values of a dictionary to string.
+    Calculates the frequency of messages in a given time frame and updates the input dictionary.
+
+    This function modifies the input dictionary by calculating the frequency based on the 'Message Count' and the
+    duration between 'start_ts_s' and 'end_ts_s'. If the 'Frequency' field is NaN, it is replaced with '-'.
+    The frequency is calculated as the number of messages divided by the duration in seconds.
+
     Args:
-        input_dict (dict): dict to convert
+        input_dict (dict): Dictionary containing message information, including 'Message Count'.
+        start_ts_s (float): Start timestamp in seconds.
+        end_ts_s (float): End timestamp in seconds.
 
-    Returns: dict with values as strings
-
+    Returns:
+        dict: The updated dictionary with the calculated frequency.
     """
+    # Calculate duration in seconds
+    duration_s = end_ts_s - start_ts_s
+
+    # Ensure the duration is not zero to avoid division by zero
+    if duration_s == 0:
+        return input_dict
+
     if "Frequency" in input_dict:
         if math.isnan(input_dict["Frequency"]):
-            input_dict["Frequency"] = "NaN"
+            input_dict["Frequency"] = "-"
+
+        if "Message Count" in input_dict:
+            # Calculate and update the frequency
+            frequency = round(input_dict["Message Count"] / duration_s)
+
+            input_dict["Frequency"] = str(frequency)
+
+            if frequency == 0:
+                input_dict["Frequency"] = "-"
+
     return input_dict
 
 
@@ -85,7 +110,9 @@ def get_bag_info_from_file(rosbag_path: str) -> dict:
     topic_metadata_list = bag.topic_table.to_dict("records")
 
     for it, entry in enumerate(topic_metadata_list):
-        topic_metadata_list[it] = convert_nan_values_to_string(entry)
+        topic_metadata_list[it] = calculate_frequency(
+            entry, bag.start_time, bag.end_time
+        )
 
     return {
         "file_name": os.path.split(rosbag_path)[1],

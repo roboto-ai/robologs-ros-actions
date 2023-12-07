@@ -75,7 +75,6 @@ main() {
     run_docker_test "-e ROBOTO_PARAM_SPLIT=True -e ROBOTO_PARAM_HIDDEN=True"
     compare_outputs ".test.bag.json" ".test.bag.json"
 
-
     # Test 4
     echo "Running Test 4: Test for new_name.json with ROBOTO_PARAM_FILE_NAME=new_name.json"
     clean_actual_output
