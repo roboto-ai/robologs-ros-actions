@@ -92,6 +92,7 @@ def process_file(input_path: str, output_path: str, hidden: bool = False) -> Non
     :param output_path: Directory path to save the output .json file.
     :param hidden: Boolean indicating if the output .json file should be hidden. Defaults to False.
     """
+    print(f"Processing {input_path}")
     parsed_info = parse_mcap_info(input_path)
 
     # Determine the output file name based on the hidden flag
@@ -104,6 +105,7 @@ def process_file(input_path: str, output_path: str, hidden: bool = False) -> Non
 
     with open(output_file, "w") as f:
         json.dump(parsed_info, f, indent=4)
+    print(f"Saved parsed info to {output_file}")
 
 
 def process_directory(input_path: str, output_path: str, hidden: bool = False) -> None:
