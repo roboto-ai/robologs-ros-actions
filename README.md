@@ -18,6 +18,9 @@ The package currently includes the following Actions:
 - `rosbag_to_csv`: Convert a rosbag to a csv file.
 - `rosbag_to_mcap`: Convert a rosbag to a mcap file.
 - `merge_rosbags`: Merge multiple rosbags.
+- `convert_coco_annotations`: Convert COCO annotation format to Roboto-supported annotation format.
+- `parse_rosout_and_tag`: Check /rosout topic for certain strings and tag dataset.
+- `rosbag_reindex`: Reindex corrupted rosbag.
 
 # Prerequisites
 
