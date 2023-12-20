@@ -27,7 +27,6 @@ file_exists_or_error() {
         exit 1
     fi
     echo "Test passed!"
-    exit 1
 
 }
 
@@ -65,6 +64,7 @@ compare_outputs() {
         echo "Test passed!"
     else
         echo "Test failed!"
+	exit 1
     fi
 }
 
