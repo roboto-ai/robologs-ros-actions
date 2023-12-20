@@ -5,11 +5,11 @@
     "Duration": "18.761s",
     "Start_date": "Sep  7 2023 13",
     "Start_time": "13:31:33.626",
-    "Start_s": 1694093493.626,
+    "Start_s": "1694093493.626",
     "End": "Sep  7 2023 13",
     "End_time": "13:31:52.387",
-    "End_s": 1694093512.387,
-    "Messages": 2352,
+    "End_s": "1694093512.387",
+    "Messages": "2352",
     "Topics": [
         {
             "Topic": "/rosout",
