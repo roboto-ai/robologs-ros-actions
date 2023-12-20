@@ -64,6 +64,7 @@ compare_outputs() {
         echo "Test passed!"
     else
         echo "Test failed!"
+	exit 1
     fi
 }
 

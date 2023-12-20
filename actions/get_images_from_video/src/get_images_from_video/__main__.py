@@ -5,7 +5,15 @@ import glob
 import pathlib
 from roboto.domain import actions
 
-def extract_frames(video_path, output_folder, frame_rate, image_format):
+
+def extract_frames(video_path, base_input_folder, base_output_folder, frame_rate, image_format):
+    relative_path = os.path.relpath(video_path, base_input_folder)
+    video_name = os.path.splitext(os.path.basename(video_path))[0]
+
+    # Replace the filename with the video name in the output folder structure
+    video_output_folder = os.path.join(base_output_folder, os.path.dirname(relative_path), video_name)
+    os.makedirs(video_output_folder, exist_ok=True)
+
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         print(f"Error opening video file {video_path}")
@@ -16,10 +24,6 @@ def extract_frames(video_path, output_folder, frame_rate, image_format):
 
     count = 0
     saved_count = 0
-
-    video_name = os.path.splitext(os.path.basename(video_path))[0]
-    video_output_folder = os.path.join(output_folder, video_name)
-    os.makedirs(video_output_folder, exist_ok=True)
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -37,12 +41,16 @@ def extract_frames(video_path, output_folder, frame_rate, image_format):
     cap.release()
     print(f"Finished extracting frames from {video_path}")
 
+
 def process_videos(input_folder, output_folder, frame_rate, image_format):
     supported_formats = ['mp4', 'avi', 'mkv', 'mov']
     for video_format in supported_formats:
-        for video_file in glob.glob(os.path.join(input_folder, f"*.{video_format}")):
-            print(f"Processing {video_file}...")
-            extract_frames(video_file, output_folder, frame_rate, image_format)
+        for root, _, files in os.walk(input_folder):
+            for file in files:
+                if file.endswith(video_format):
+                    video_path = os.path.join(root, file)
+                    print(f"Processing {video_path}...")
+                    extract_frames(video_path, input_folder, output_folder, frame_rate, image_format)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input-dir", dest="input_dir", type=pathlib.Path, required=False, help="Directory containing input files to process", default=os.environ.get(actions.InvocationEnvVar.InputDir.value))

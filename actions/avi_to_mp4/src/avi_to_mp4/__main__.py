@@ -5,8 +5,17 @@ import subprocess
 
 from roboto.domain import actions
 
-def convert_avi_to_mp4(avi_file_path, output_dir, bitrate, frame_rate, resolution, crf, preset):
-    mp4_file_path = os.path.join(output_dir, os.path.splitext(os.path.basename(avi_file_path))[0] + '.mp4')
+
+def convert_avi_to_mp4(avi_file_path, input_base_dir, output_base_dir, bitrate, frame_rate, resolution, crf, preset):
+    # Compute the relative path from the input base directory
+    relative_path = os.path.relpath(avi_file_path, input_base_dir)
+    # Replace the extension and construct the full output path
+    relative_mp4_path = os.path.splitext(relative_path)[0] + '.mp4'
+    mp4_file_path = os.path.join(output_base_dir, relative_mp4_path)
+
+    # Ensure the output directory exists
+    os.makedirs(os.path.dirname(mp4_file_path), exist_ok=True)
+
     ffmpeg_command = ["ffmpeg", "-i", avi_file_path]
     
     if bitrate:
@@ -24,20 +33,23 @@ def convert_avi_to_mp4(avi_file_path, output_dir, bitrate, frame_rate, resolutio
     subprocess.run(ffmpeg_command)
 
 def main(args: argparse.Namespace) -> None:
-    input_dir = args.input_dir
-    output_dir = args.output_dir
-    
-    for filename in os.listdir(input_dir):
-        if filename.endswith(".avi"):
-            convert_avi_to_mp4(
-                os.path.join(input_dir, filename), 
-                output_dir,
-                args.bitrate,
-                args.frame_rate,
-                args.resolution,
-                args.crf,
-                args.preset
-            )
+    input_dir = str(args.input_dir)
+    output_dir = str(args.output_dir)
+
+    for root, dirs, files in os.walk(input_dir):
+        for filename in files:
+            if filename.endswith((".avi", ".mkv")):
+                avi_file_path = os.path.join(root, filename)
+                convert_avi_to_mp4(
+                    avi_file_path,
+                    input_dir,
+                    output_dir,
+                    args.bitrate,
+                    args.frame_rate,
+                    args.resolution,
+                    args.crf,
+                    args.preset
+                )
     
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input-dir", dest="input_dir", type=pathlib.Path, required=False, help="Directory containing input files to process", default=os.environ.get(actions.InvocationEnvVar.InputDir.value))

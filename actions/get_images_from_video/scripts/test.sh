@@ -27,6 +27,7 @@ file_exists_or_error() {
         exit 1
     fi
     echo "Test passed!"
+    exit 1
 
 }
 
