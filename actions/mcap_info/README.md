@@ -1,6 +1,6 @@
 # mcap_info
 
-This Action saves mcap metadata to a json file.
+This Action extracts metadata from MCAP files (.mcap) and saves it to a JSON file.
 
 ## Getting started
 

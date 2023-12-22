@@ -1,6 +1,8 @@
 # run_yolov8_rosbag
 
-This Action runs the yolov8 object detector on a rosbag.
+This Action runs the YOLOv8 object detection algorithm on images in a rosbag (.bag).
+
+For each processed image topic, it generates a detections.json file containing detailed bounding box information. Additionally, it can provide visual outputs in the form of annotated videos or images, showcasing the detected bounding boxes.
 
 ## Getting started
 

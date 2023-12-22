@@ -1,6 +1,6 @@
 # parse_rosout_and_tag
 
-Action to parse /rosout topic and apply a tag if substring is found.
+This Action adds tags to a dataset by parsing the /rosout topic and checking for user-provided substrings.
 
 ## Getting started
 

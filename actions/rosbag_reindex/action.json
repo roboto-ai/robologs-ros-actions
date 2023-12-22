@@ -1,6 +1,7 @@
 {
     "name": "rosbag_reindex",
-    "description": "Action to reindex unindexed rosbags",
+    "short_description": "Reindex any unindexed rosbags.",
+    "description": "This Action reindexes any unindexed rosbags.",
     "parameters": [
         {
             "name": "FILE_PATH",

@@ -1,6 +1,6 @@
 # rosbag_info
 
-This Action saves rosbag metadata to a json file.
+This Action extracts metadata from rosbag files (.bag) and saves it to a JSON file.
 
 ## Getting started
 

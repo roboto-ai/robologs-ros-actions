@@ -1,11 +1,12 @@
 {
     "name": "run_svo_slam_rosbag",
-    "description": "This Action runs SVO SLAM on a rosbag image topic",
+    "short_description": "Run SVO SLAM algorithm on images in a rosbag.",
+    "description": "This Action runs the [SVO SLAM](https://github.com/uzh-rpg/rpg_svo_pro_open) algorithm on images in a rosbag (.bag)",
     "parameters": [
         {
             "name": "TOPIC",
             "required": true,
-            "description": "Image topic to run SVO"
+            "description": "Image topic to run SVO on"
         }
     ],
     "container_parameters": {

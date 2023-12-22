@@ -1,6 +1,7 @@
 {
     "name": "db3_info",
-    "description": "This Action saves ros2 db3 metadata in a json file.",
+    "short_description": "Extract metadata from ROS 2 DB3 files.",
+    "description": "This Action extracts metadata from ROS 2 DB3 files (.db3).\n\nBy default, a hidden json dotfile will be produced and rendered as .db3 file metadata in Roboto.",
     "parameters": [
         {
             "name": "HIDDEN",
@@ -14,10 +15,7 @@
         "workdir": "",
         "command": []
     },
-    "tags": [
-        "ros2",
-        "transform"
-    ],
+    "tags": ["ros2", "transform"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/db3_info"
     }

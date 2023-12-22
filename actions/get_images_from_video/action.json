@@ -1,5 +1,6 @@
 {
     "name": "get_images_from_video",
+    "short_description": "Extract images from common video formats.",
     "description": "This Action extracts images from common video formats. MP4, AVI, MOV and MKV are supported.",
     "parameters": [
         {

@@ -1,6 +1,8 @@
 # convert_coco_annotations
 
-This Action converts the COCO annotation format to the Roboto platform-supported annotation format.
+This Action converts [COCO](https://cocodataset.org) annotations in .json files to Roboto-supported ones.
+
+Under the hood, this is the [Ultralytics YOLO](https://github.com/ultralytics/ultralytics) format.
 
 ## Getting started
 

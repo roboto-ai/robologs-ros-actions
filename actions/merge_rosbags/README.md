@@ -1,6 +1,8 @@
 # merge_rosbags
 
-This Action merges rosbags.
+This Action merges multiple rosbag files into a single file.
+
+By default, all topics are extracted and merged, but you can specify an optional list of topics instead.
 
 ## Getting started
 

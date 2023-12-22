@@ -1,6 +1,7 @@
 {
     "name": "get_videos_from_rosbag",
-    "description": "This Action extracts videos from a rosbag",
+    "short_description": "Create videos from a rosbag.",
+    "description": "This Action creates videos from a rosbag.\n\nBy default, all image topics are extracted into separate videos, but you can optionally specify a list of topics to extract instead.",
     "parameters": [
         {
             "name": "FORMAT",
@@ -61,10 +62,7 @@
         "memory": "8192",
         "vCPU": "2048"
     },
-    "tags": [
-        "ros",
-        "transform"
-    ],
+    "tags": ["ros", "transform"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/get_videos_from_rosbag"
     }

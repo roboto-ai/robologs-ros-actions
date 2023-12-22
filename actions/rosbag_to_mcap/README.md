@@ -1,6 +1,6 @@
 # rosbag_to_mcap
 
-This Action converts a rosbag file to mcap.
+This Action converts data in rosbag files (.bag) to the MCAP format (.mcap)
 
 ## Getting started
 

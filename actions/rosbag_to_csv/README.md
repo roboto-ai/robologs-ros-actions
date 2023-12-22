@@ -1,6 +1,8 @@
 # rosbag_to_csv
 
-This Action converts a rosbag to a csv.
+This Action converts data in rosbag files (.bag) to CSV.
+
+By default, all topics will be extracted from the input file(s). You can use the parameter to extract specific topics. 
 
 ## Getting started
 

@@ -1,6 +1,7 @@
 {
     "name": "rosbag_info",
-    "description": "This Action saves rosbag metadata in a json file.",
+    "short_description": "Extract metadata from rosbag files.",
+    "description": "This Action extracts metadata from rosbag files.\n\nBy default, a hidden json dotfile will be produced and rendered as .bag file metadata in Roboto.",
     "parameters": [
         {
             "name": "SPLIT",

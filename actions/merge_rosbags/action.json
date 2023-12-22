@@ -1,6 +1,7 @@
 {
     "name": "merge_rosbags",
-    "description": "This Action merges rosbags",
+    "short_description": "Merge multiple rosbag files into a single file.",
+    "description": "This Action merges multiple rosbag files into a single file. By default, all topics are extracted and merged, but you can specify an optional list of topics instead.",
     "parameters": [
         {
             "name": "TOPICS",
@@ -23,10 +24,7 @@
         "memory": "8192",
         "vCPU": "2048"
     },
-    "tags": [
-        "ros",
-        "transform"
-    ],
+    "tags": ["ros", "transform"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/merge_rosbags"
     }

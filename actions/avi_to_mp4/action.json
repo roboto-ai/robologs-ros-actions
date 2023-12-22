@@ -1,6 +1,7 @@
 {
     "name": "avi_to_mp4",
-    "description": "An Action to convert .avi video files to the .mp4 format.",
+    "short_description": "Convert .avi video files to .mp4.",
+    "description": "This Action converts .avi video files to the .mp4 format. Under the hood, it uses the ffmpeg library. When invoking, you can set parameter values for resolution, frame rate, bitrate and more.",
     "parameters": [
         {
             "name": "BITRATE",
@@ -38,12 +39,7 @@
         "memory": 1024,
         "storage": 21
     },
-    "tags": [
-        "avi",
-        "mp4",
-        "ffmpeg",
-        "transform"
-    ],
+    "tags": ["avi", "mp4", "ffmpeg", "transform"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/avi_to_mp4"
     }

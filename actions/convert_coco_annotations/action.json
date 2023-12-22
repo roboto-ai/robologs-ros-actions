@@ -1,11 +1,12 @@
 {
     "name": "convert_coco_annotations",
-    "description": "This Action converts the COCO annotation format to the Roboto platform-supported annotation format.",
+    "short_description": "Convert COCO annotations to Roboto annotations.",
+    "description": "This Action converts [COCO](https://cocodataset.org) annotations in .json files to Roboto-supported annotations. Under the hood, this is the [Ultralytics YOLO](https://github.com/ultralytics/ultralytics) format.",
     "parameters": [
         {
             "name": "OUTPUT_FILE_NAME",
             "required": false,
-            "description": "Output file name of Roboto platform-supported annotation file.",
+            "description": "Output name of Roboto-supported annotation file.",
             "default": "detections.json"
         }
     ],

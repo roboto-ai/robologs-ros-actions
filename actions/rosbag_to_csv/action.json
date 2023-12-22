@@ -1,6 +1,7 @@
 {
     "name": "rosbag_to_csv",
-    "description": "This Action converts a rosbag to a csv.",
+    "short_description": "Convert data in rosbag files to CSV.",
+    "description": "This Action converts data in rosbag files (.bag) to CSV.\n\nBy default, all topics will be extracted from the input file(s). You can use the parameter to extract specific topics. This helps to reduce the size of the resulting file.",
     "parameters": [
         {
             "name": "TOPICS",
@@ -13,11 +14,7 @@
         "memory": 1024,
         "storage": 21
     },
-    "tags": [
-        "ros",
-        "transform",
-        "csv"
-    ],
+    "tags": ["ros", "transform", "csv"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/rosbag_to_csv"
     }

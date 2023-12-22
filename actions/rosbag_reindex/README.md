@@ -1,6 +1,6 @@
 # rosbag_reindex
 
-Action to reindex unindexed rosbags
+This Action reindexes any unindexed rosbags (.bag)
 
 ## Getting started
 

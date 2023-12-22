@@ -1,6 +1,6 @@
 # run_svo_slam_rosbag
 
-This Action runs SVO SLAM on a rosbag.
+This Action runs the [SVO SLAM](https://github.com/uzh-rpg/rpg_svo_pro_open) algorithm on images in a rosbag (.bag)
 
 ## Getting started
 

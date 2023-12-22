@@ -1,6 +1,6 @@
 # db3_info
 
-This Action saves ros2 db3 metadata to a json file.
+This Action extracts metadata from ROS 2 DB3 files (.db3) and saves it to a JSON file.
 
 ## Getting started
 

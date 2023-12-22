@@ -1,6 +1,7 @@
 {
     "name": "rosbag_to_mcap",
-    "description": "This Action converts a rosbag file to the mcap format.",
+    "short_description": "Convert data in rosbag files to MCAP.",
+    "description": "This Action converts data in rosbag files (.bag) to the MCAP format (.mcap)",
     "tags": [
         "ros",
         "ros2",

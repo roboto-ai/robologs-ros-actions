@@ -1,6 +1,6 @@
 # get_images_from_video
 
-This Action extracts images from common video formats.
+This Action extracts images from common video formats. MP4, AVI, MOV and MKV are supported.
 
 ## Getting started
 

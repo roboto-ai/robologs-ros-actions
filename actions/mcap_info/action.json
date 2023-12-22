@@ -1,6 +1,7 @@
 {
     "name": "mcap_info",
-    "description": "This Action saves mcap metadata in a json file.",
+    "short_description": "Extract metadata from MCAP files.",
+    "description": "This Action extracts metadata from MCAP files.\n\nBy default, a hidden json dotfile will be produced and rendered as .mcap file metadata in Roboto.",
     "parameters": [
         {
             "name": "HIDDEN",

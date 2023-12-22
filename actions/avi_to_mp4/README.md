@@ -1,6 +1,6 @@
 # avi_to_mp4
 
-An Action to convert .avi video files to the .mp4 format.
+This Action converts .avi video files to the .mp4 format
 
 ## Getting started
 
