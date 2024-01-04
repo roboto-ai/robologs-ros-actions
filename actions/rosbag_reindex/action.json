@@ -16,5 +16,6 @@
     },
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/rosbag_reindex"
-    }
+    },
+    "tags": ["ros"]
 }

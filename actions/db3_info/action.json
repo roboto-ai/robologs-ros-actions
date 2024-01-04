@@ -15,7 +15,7 @@
         "workdir": "",
         "command": []
     },
-    "tags": ["ros2", "transform"],
+    "tags": ["ros2"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/db3_info"
     }

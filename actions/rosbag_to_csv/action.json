@@ -14,7 +14,7 @@
         "memory": 1024,
         "storage": 21
     },
-    "tags": ["ros", "transform", "csv"],
+    "tags": ["ros"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/rosbag_to_csv"
     }

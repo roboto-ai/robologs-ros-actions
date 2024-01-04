@@ -16,9 +16,7 @@
         "command": []
     },
     "tags": [
-        "COCO",
-        "annotation",
-        "labels"
+        "other"
     ],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/convert_coco_annotations"

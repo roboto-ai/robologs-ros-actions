@@ -39,7 +39,7 @@
         "memory": 1024,
         "storage": 21
     },
-    "tags": ["avi", "mp4", "ffmpeg", "transform"],
+    "tags": ["other"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/avi_to_mp4"
     }

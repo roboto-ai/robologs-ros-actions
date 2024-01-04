@@ -15,9 +15,7 @@
         }
     ],
     "tags": [
-        "ros",
-        "tag",
-        "rosout"
+        "ros"
     ],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/parse_rosout_and_tag"
