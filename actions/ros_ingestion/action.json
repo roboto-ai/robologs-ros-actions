@@ -1,0 +1,9 @@
+{
+    "name": "ros_ingestion",
+    "description": "A Python-based Roboto Action",
+    "compute_requirements": {
+        "vCPU": 512,
+        "memory": 1024,
+        "storage": 21
+    }
+}
