@@ -7,7 +7,7 @@
         {
             "name": "TOPICS",
             "required": false,
-            "description": "Comma-separated list of topics to extract. For example: /camera0/image_raw,/camera0/image_raw"
+            "description": "Comma-separated list of topics to extract. For example: /camera0/image_raw,/camera1/image_raw"
         }
     ],
     "compute_requirements": {
