@@ -1,9 +1,25 @@
 {
     "name": "ros_ingestion",
-    "description": "A Python-based Roboto Action",
+    "short_description": "Ingest data from rosbag files into topics for visualization and search.",
+
+    "description": "Ingest data from rosbag files into topics for visualization and search.",
+    "parameters": [
+        {
+            "name": "TOPICS",
+            "required": false,
+            "description": "Comma-separated list of topics to extract. For example: /camera0/image_raw,/camera0/image_raw"
+        }
+    ],
     "compute_requirements": {
-        "vCPU": 512,
-        "memory": 1024,
+        "vCPU": 4096,
+        "memory": 8192,
         "storage": 21
+    },
+    "tags": [
+        "ros"
+    ],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/ros_ingestion"
     }
+
 }
