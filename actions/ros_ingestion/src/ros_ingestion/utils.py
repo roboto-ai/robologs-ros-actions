@@ -183,6 +183,9 @@ def parse_message_schemas(input_text):
                 if line.startswith("#") or not line:
                     continue
 
+                if "=" in line:
+                    continue
+
                 parts = line.split()
                 if len(parts) < 2:
                     continue

@@ -85,14 +85,6 @@ def test_mcap(tmp_path):
         "offset": "uint32",
         "datatype": "uint8",
         "count": "uint32",
-        "INT8": "uint8",
-        "UINT8": "uint8",
-        "INT16": "uint8",
-        "UINT16": "uint8",
-        "INT32": "uint8",
-        "UINT32": "uint8",
-        "FLOAT32": "uint8",
-        "FLOAT64": "uint8",
         "test_nested_message_type": "other_nested_message_type[]",
     }
 

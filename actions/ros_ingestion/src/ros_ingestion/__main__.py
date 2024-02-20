@@ -118,7 +118,8 @@ def process_data(
     start_time_ns = topic_object[4]
     end_time_ns = topic_object[5]
 
-    topic_name_fix = topic_name.replace("/", "_")
+    topic_name_fix = topic_name.replace("/", ".")
+    topic_name_fix = topic_name_fix[1:]
 
     topic = topics.Topic.create(
         request=topics.CreateTopicRequest(
