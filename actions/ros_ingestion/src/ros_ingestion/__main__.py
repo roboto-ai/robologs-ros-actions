@@ -20,7 +20,7 @@ from roboto.transactions import TransactionManager
 
 import ros_ingestion.utils as utils
 
-log = logging.getLogger("Ingesting rosbag files to Roboto")
+log = logging.getLogger("Ingesting ROS bag files to Roboto")
 
 
 def load_env_var(env_var: actions.InvocationEnvVar) -> str:
@@ -90,7 +90,7 @@ def process_data(
     output_dir_temp,
 ):
     """
-    This  function creates per-topic MCAP files and uploads them to Roboto.
+    This function creates per-topic MCAP files and uploads them to Roboto.
 
     Args:
     - ros_file_path: The path to the ROS bag file.
