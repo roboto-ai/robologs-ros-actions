@@ -4,6 +4,7 @@ import pathlib
 
 from typing import Optional, List, Tuple
 from roboto.domain import actions
+from roboto.env import RobotoEnvKey
 from robologs_ros_utils.sources.ros1 import argument_parsers, ros_utils
 from robologs_ros_utils.utils import file_utils
 
@@ -177,7 +178,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory containing input files to process",
-    default=os.environ.get(actions.InvocationEnvVar.InputDir.value),
+    default=os.environ.get(RobotoEnvKey.InputDir.value),
 )
 parser.add_argument(
     "-o",
@@ -186,7 +187,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory to which to write any output files to be uploaded",
-    default=os.environ.get(actions.InvocationEnvVar.OutputDir.value),
+    default=os.environ.get(RobotoEnvKey.OutputDir.value),
 )
 
 parser.add_argument(

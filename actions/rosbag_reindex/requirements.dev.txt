@@ -1,6 +1,3 @@
 # Python packages to install into the this directory's virtual environment
 # for the purpose of development, testing, and deployment.
-
-# Install all required runtime dependencies in local virtual environment.
-
-# Add additional Python packages to install here.
+roboto
