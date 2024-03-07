@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=run_yolov8_images
 INPUT_FILE_PATH="./test/input/folder1/folder2/img1.jpg"

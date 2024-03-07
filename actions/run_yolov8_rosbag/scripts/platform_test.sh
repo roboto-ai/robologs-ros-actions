@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=run_yolov8_rosbag
 INPUT_FILE_PATH="./test/input/tiny.bag"

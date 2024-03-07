@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=rosbag_to_mcap
 INPUT_FILE_PATH="./test/input/tiny.bag"

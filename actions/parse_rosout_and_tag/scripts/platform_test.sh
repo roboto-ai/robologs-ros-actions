@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=parse_rosout_and_tag
 INPUT_FILE_PATH="./test/input/tiny_rosout.bag"

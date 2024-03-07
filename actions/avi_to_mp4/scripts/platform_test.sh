@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=avi_to_mp4
 INPUT_FILE_PATH="./test/input/avi.avi"

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=db3_info
 INPUT_FILE_PATH="./test/input/tiny.db3"

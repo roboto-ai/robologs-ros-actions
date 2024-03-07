@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 ACTION_NAME=rosbag_to_csv
 INPUT_FILE_PATH="./test/input/tiny_imu.bag"
 EXPECTED_OUTPUT_FILE_NAME="dvs-imu.csv"

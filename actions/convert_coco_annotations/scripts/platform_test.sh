@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=convert_coco_annotations
 INPUT_FILE_PATH="./test/input/example_annotations.coco.json"

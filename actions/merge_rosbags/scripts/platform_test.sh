@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=merge_rosbags
 INPUT_FILE_PATH1="./test/input/test.bag"

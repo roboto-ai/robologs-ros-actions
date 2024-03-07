@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=mcap_info
 INPUT_FILE_PATH="./test/input/tiny.mcap"

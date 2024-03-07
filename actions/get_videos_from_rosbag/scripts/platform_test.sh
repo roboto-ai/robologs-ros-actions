@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=get_images_from_rosbag
 INPUT_FILE_PATH="./test/input/tiny.bag"

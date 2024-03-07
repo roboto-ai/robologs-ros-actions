@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ACTION_NAME=rosbag_info
 INPUT_FILE_PATH="./test/input/test.bag"
