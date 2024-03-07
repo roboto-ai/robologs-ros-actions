@@ -10,6 +10,7 @@ from bagpy import bagreader
 from typing import Union
 
 from roboto.domain import actions
+from roboto.env import RobotoEnvKey
 
 
 def get_bag_info_from_file_or_folder(input_path: str) -> dict:
@@ -194,7 +195,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory containing input files to process",
-    default=os.environ.get(actions.InvocationEnvVar.InputDir.value),
+    default=os.environ.get(RobotoEnvKey.InputDir.value),
 )
 parser.add_argument(
     "-o",
@@ -203,7 +204,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory to which to write any output files to be uploaded",
-    default=os.environ.get(actions.InvocationEnvVar.OutputDir.value),
+    default=os.environ.get(RobotoEnvKey.OutputDir.value),
 )
 
 parser.add_argument(

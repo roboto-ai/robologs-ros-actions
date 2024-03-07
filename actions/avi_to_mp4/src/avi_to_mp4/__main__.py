@@ -4,6 +4,7 @@ import pathlib
 import subprocess
 
 from roboto.domain import actions
+from roboto.env import RobotoEnvKey
 
 
 def convert_avi_to_mp4(avi_file_path, input_base_dir, output_base_dir, bitrate, frame_rate, resolution, crf, preset):
@@ -50,10 +51,11 @@ def main(args: argparse.Namespace) -> None:
                     args.crf,
                     args.preset
                 )
-    
+
+
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input-dir", dest="input_dir", type=pathlib.Path, required=False, help="Directory containing input files to process", default=os.environ.get(actions.InvocationEnvVar.InputDir.value))
-parser.add_argument("-o", "--output-dir", dest="output_dir", type=pathlib.Path, required=False, help="Directory to which to write any output files to be uploaded", default=os.environ.get(actions.InvocationEnvVar.OutputDir.value))
+parser.add_argument("-i", "--input-dir", dest="input_dir", type=pathlib.Path, required=False, help="Directory containing input files to process", default=os.environ.get(RobotoEnvKey.InputDir.value))
+parser.add_argument("-o", "--output-dir", dest="output_dir", type=pathlib.Path, required=False, help="Directory to which to write any output files to be uploaded", default=os.environ.get(RobotoEnvKey.OutputDir.value))
 
 # Adding new arguments
 parser.add_argument("--bitrate", type=str, help="Set video bitrate (e.g., '1M')", default=os.environ.get("ROBOTO_PARAM_BITRATE"))

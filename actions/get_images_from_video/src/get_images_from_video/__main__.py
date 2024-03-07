@@ -4,6 +4,7 @@ import argparse
 import glob
 import pathlib
 from roboto.domain import actions
+from roboto.env import RobotoEnvKey
 
 
 def extract_frames(video_path, base_input_folder, base_output_folder, frame_rate, image_format):
@@ -52,9 +53,10 @@ def process_videos(input_folder, output_folder, frame_rate, image_format):
                     print(f"Processing {video_path}...")
                     extract_frames(video_path, input_folder, output_folder, frame_rate, image_format)
 
+
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input-dir", dest="input_dir", type=pathlib.Path, required=False, help="Directory containing input files to process", default=os.environ.get(actions.InvocationEnvVar.InputDir.value))
-parser.add_argument("-o", "--output-dir", dest="output_dir", type=pathlib.Path, required=False, help="Directory to which to write any output files to be uploaded", default=os.environ.get(actions.InvocationEnvVar.OutputDir.value))
+parser.add_argument("-i", "--input-dir", dest="input_dir", type=pathlib.Path, required=False, help="Directory containing input files to process", default=os.environ.get(RobotoEnvKey.InputDir.value))
+parser.add_argument("-o", "--output-dir", dest="output_dir", type=pathlib.Path, required=False, help="Directory to which to write any output files to be uploaded", default=os.environ.get(RobotoEnvKey.OutputDir.value))
 parser.add_argument("--frame_rate", type=float, required=False, help="Frame rate at which to extract images", default=os.environ.get("ROBOTO_PARAM_FRAME_RATE"))
 parser.add_argument("--image_format", type=str, required=False, help="Format of output images (png or jpg)", default=os.environ.get("ROBOTO_PARAM_IMAGE_FORMAT", "jpg"))
 
