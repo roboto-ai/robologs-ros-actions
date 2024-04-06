@@ -11,6 +11,7 @@ The package currently includes the following Actions:
 - `get_images_from_videos`: Extract images from common video formats.
 - `avi_to_mp4`: Convert .avi video files to .mp4.
 - `run_yolov8_rosbag`: Run the YOLOv8 object detection algorithm on a rosbag.
+- `run_yolov8_images`: Run the YOLOv8 object detection algorithm on a folder of images.
 - `run_svo_slam_rosbag`: Run the [SVO SLAM](https://github.com/uzh-rpg/rpg_svo_pro_open) algorithm on a rosbag.
 - `rosbag_info`: Get metadata from a rosbag file.
 - `mcap_info`: Get metadata from an MCAP file.

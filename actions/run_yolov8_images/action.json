@@ -1,6 +1,8 @@
 {
     "name": "run_yolov8_images",
-    "description": "This Action executes the YOLOv8 object detection algorithm on a folder with images. For each processed folder with images, it generates a detections.json file with bounding box or segmentation annotations. Additionally, it can provide annotated output videos.",
+    "short_description": "Run YOLOv8 object detection algorithm on a folder with images.",
+    "description": "This Action runs the YOLOv8 object detection algorithm on a folder with images.\n\nFor each processed folder with images, it generates a detections.json file with bounding box or segmentation annotations. Additionally, it can provide annotated output videos.",
+
     "parameters": [
         {
             "name": "FRAME_RATE",

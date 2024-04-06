@@ -1,7 +1,7 @@
 {
     "name": "run_yolov8_rosbag",
     "short_description": "Run YOLOv8 object detection algorithm on images in a rosbag.",
-    "description": "This Action runs the YOLOv8 object detection algorithm on images in a rosbag (.bag).\n\nFor each processed image topic, it generates a detections.json file containing detailed bounding box information. Additionally, it can provide visual outputs in the form of annotated videos or images, showcasing the detected bounding boxes.",
+    "description": "This Action runs the YOLOv8 object detection algorithm on images in a rosbag (.bag).\n\nFor each processed image topic, it generates a detections.json file with bounding box or segmentation annotations. Additionally, it can provide annotated output videos.",
     "parameters": [
         {
             "name": "FORMAT",

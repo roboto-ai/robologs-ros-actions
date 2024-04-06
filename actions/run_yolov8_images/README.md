@@ -1,6 +1,8 @@
 # run_yolov8_images
 
-This Action runs the yolov8 object detector on a folder of images.
+This Action runs the YOLOv8 object detector on a folder of images.
+
+For each processed folder with images, it generates a detections.json file with bounding box or segmentation annotations. Additionally, it can provide annotated output videos.
 
 ## Getting started
 
