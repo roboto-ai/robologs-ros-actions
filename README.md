@@ -13,9 +13,6 @@ The package currently includes the following Actions:
 - `run_yolov8_rosbag`: Run the YOLOv8 object detection algorithm on a rosbag.
 - `run_yolov8_images`: Run the YOLOv8 object detection algorithm on a folder of images.
 - `run_svo_slam_rosbag`: Run the [SVO SLAM](https://github.com/uzh-rpg/rpg_svo_pro_open) algorithm on a rosbag.
-- `rosbag_info`: Get metadata from a rosbag file.
-- `mcap_info`: Get metadata from an MCAP file.
-- `db3_info`: Get metadata from a db3 file.
 - `rosbag_to_csv`: Convert a rosbag to a CSV file.
 - `rosbag_to_mcap`: Convert a rosbag to an MCAP file.
 - `merge_rosbags`: Merge multiple rosbag files into a single file.

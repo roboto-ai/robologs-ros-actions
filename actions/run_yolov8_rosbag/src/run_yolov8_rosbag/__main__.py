@@ -324,7 +324,6 @@ def run_detect(
 
     if create_video:
         img = results[0].plot()
-
     return json.loads(results[0].tojson(normalize=True)), img if len(
         results
     ) == 1 else (None, None)

@@ -1,4 +1,0 @@
-# This file is a directive to pyenv (https://github.com/pyenv/pyenv) to set matching version of Python in this directory.
-# If you don't use pyenv, you can safely delete this file.
-# The roboto CLI requires Python 3.9 or higher.
-3.10

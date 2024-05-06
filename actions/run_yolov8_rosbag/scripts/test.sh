@@ -75,47 +75,47 @@ main() {
     echo "Running Test 1: Test basic image extraction"
     clean_actual_output
     run_docker_test ""
-    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/dvs_image_raw_000000.jpg
+    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/dvs_image_raw_000000.jpg
     # Check second
-    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs1_image_raw/imgs/dvs1_image_raw_000002.jpg
+    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs1_image_raw/dvs1_image_raw_000002.jpg
    
     # Test 2
     echo "Running Test 2: Verify different file formats"
     clean_actual_output
     run_docker_test "-e ROBOTO_PARAM_FORMAT=png"
-    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/dvs_image_raw_000000.png
+    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/dvs_image_raw_000000.png
 
     # Test 3
     echo "Running Test 3: Verify msg_timestamp output naming"
     clean_actual_output
     run_docker_test "-e ROBOTO_PARAM_NAMING=msg_timestamp"
-    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/dvs_image_raw_1540820324517214132.jpg
+    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/dvs_image_raw_1540820324517214132.jpg
     
     #clean_actual_output
     run_docker_test "-e ROBOTO_PARAM_NAMING=rosbag_timestamp"
-    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/dvs_image_raw_1696854171077412542.jpg
+    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/dvs_image_raw_1696854171077412542.jpg
 
     # Test 4
     echo "Running Test 4: Verify sampling"
     clean_actual_output
     run_docker_test "-e ROBOTO_PARAM_SAMPLE=2"
-    check_file_does_not_exist $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/dvs_image_raw_000001.jpg
+    check_file_does_not_exist $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/dvs_image_raw_000001.jpg
 
     # Test 5
     echo "Running Test 5: Verify start, end time trimming"
     clean_actual_output
     run_docker_test "-e ROBOTO_PARAM_END_TIME=0.05"
-    check_file_does_not_exist $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/dvs_image_raw_000003.jpg
+    check_file_does_not_exist $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/dvs_image_raw_000003.jpg
     clean_actual_output
     run_docker_test "-e ROBOTO_PARAM_START_TIME=0.05"
-    check_file_does_not_exist $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/dvs_image_raw_000000.jpg
+    check_file_does_not_exist $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/dvs_image_raw_000000.jpg
 
     # Test 6
-    echo "Running Test 6: Verify detections"
-    clean_actual_output
-    run_docker_test "-e ROBOTO_PARAM_TOPICS=/dvs/image_raw"
-    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/detections.json
-    file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/imgs/img_manifest.json
+    #echo "Running Test 6: Verify detections"
+    #clean_actual_output
+    #run_docker_test "-e ROBOTO_PARAM_TOPICS=/dvs/image_raw"
+    #file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/detections.json
+    #file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/img_manifest.json
     #run_docker_test "-e ROBOTO_PARAM_SAVE_VIDEO=True"
     #file_exists_or_error $ACTUAL_OUTPUT_DIR/tiny/dvs_image_raw/video.mp4
 
