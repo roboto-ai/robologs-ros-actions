@@ -1,0 +1,43 @@
+{
+    "name": "embed_images_to_pinecone",
+    "description":"Embed all images under a directory with CLIP and store embeddings in a serverless Pinecone vector database",
+    "short_description":"Generate embeddings for all images in a directory",
+    "compute_requirements": {
+        "vCPU": 512,
+        "memory": 1024,
+        "gpu": false,
+        "storage": 21
+    },
+    "metadata": {
+	"github_url":"https://github.com/dhpitt/embed_images_to_pinecone"
+    },
+    "parameters": [
+	{
+	"name":"PINECONE_API_KEY",
+	"required":true,
+	"description":"API key for Pinecone vector database service."
+	},
+	{
+	"name":"PINECONE_INDEX_NAME",
+	"required":false,
+	"description":"name of Pinecone vector DB index in which to store embeddings. One will be created by default if none is provided."
+	},
+	{
+	"name":"PINECONE_NAMESPACE",
+	"required":false,
+	"description":"Namespace within above Pinecone index into which to place embeddings. If none provided, namespace is 'default'"
+	},
+	{
+	"name":"PINECONE_AWS_REGION",
+	"required":false,
+	"description":"AWS region to configure serverless Pinecone DB. The free tier only supports us-east-1, so this will be the default value if none is provided."
+	},
+	{
+	"name":"CLIP_MODEL",
+	"required":false,
+	"description":"Name of pretrained HuggingFace CLIP model to use for feature extraction. For me information check https://huggingface.co/transformers/v3.3.1/pretrained_models.html"
+	}
+    ],
+    "tags": []
+}
+
