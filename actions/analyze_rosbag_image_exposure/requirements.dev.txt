@@ -4,4 +4,5 @@ roboto==0.3.0
 opencv-python
 numpy
 matplotlib
-robologs-ros-utils
+robologs-ros-utils==0.1.1a76
+--extra-index-url https://test.pypi.org/simple/
