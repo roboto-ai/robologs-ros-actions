@@ -1,6 +1,6 @@
 # Python packages to install into the this directory's virtual environment
 # for the purpose of development, testing, and deployment.
-roboto
+roboto==0.3.0
 opencv-python
 numpy
 matplotlib

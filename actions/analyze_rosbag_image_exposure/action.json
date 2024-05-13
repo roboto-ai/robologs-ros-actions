@@ -1,14 +1,8 @@
 {
     "name": "analyze_rosbag_image_exposure",
     "short_description": "Extract images from a rosbag and tag overexposed or underexposed.",
-    "description": "This Action extracts images from a rosbag and can optionally create a video.\n\nBy default, all image topics are extracted, but you can optionally specify a list of topics to extract instead.",
+    "description": "This Action extracts images from a rosbag and tags those rosbags (and optionally individual images) that are overexposed or underexposed.",
     "parameters": [
-        {
-            "name": "FORMAT",
-            "required": false,
-            "description": "Output image format. Valid values are 'jpg', 'png'",
-            "default": "jpg"
-        },
         {
             "name": "MANIFEST",
             "required": false,
@@ -26,27 +20,6 @@
 	    "description": "Number of bins in image intensity histogram for exposure analysis"
 	},
         {
-            "name": "NAMING",
-            "required": false,
-            "description": "Naming schema for the output images. Valid values are 'sequential', 'rosbag_timestamp', 'msg_timestamp'",
-            "default": "sequential"
-        },
-        {
-            "name": "SAMPLE",
-            "required": false,
-            "description": "Desired sampling rate. For example: 2 to only extract every 2nd image"
-        },
-        {
-            "name": "START_TIME",
-            "required": false,
-            "description": "Start time for the extraction. In seconds since the beginning of the recording"
-        },
-        {
-            "name": "END_TIME",
-            "required": false,
-            "description": "End time for the extraction. In seconds since the beginning of the recording"
-        },
-        {
             "name": "EXTRACT_ALL_IMAGES",
             "required": false,
             "description": "Set True to extract all images and tag with file-level metadata."
@@ -58,6 +31,6 @@
     },
     "tags": ["ros"],
     "metadata": {
-        "github_url": "https://github.com/dhpitt/NULL"
+        "github_url":"https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/analyze_rosbag_image_exposure" 
     }
 }
