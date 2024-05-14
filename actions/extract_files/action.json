@@ -1,0 +1,21 @@
+{
+    "name": "extract_files",
+    "short_description": "This Action handles the extraction of compressed and archived files. It supports both tar and zip formats.",
+    "description": "This Action handles the extraction of compressed and archived files. It supports both tar and zip formats.",
+    "parameters": [
+        {
+            "name": "ISOLATE_EXTRACTION",
+            "required": "false",
+            "description": "Set to True to create a separate output folder for each zip, tar, tar.gz file.",
+            "default": "True"
+        }
+    ],
+    "compute_requirements": {
+        "memory": "8192",
+        "vCPU": "2048"
+    },
+    "tags": [],
+    "metadata": {
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/extract_files"
+    }
+}

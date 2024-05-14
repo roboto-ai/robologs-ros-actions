@@ -19,6 +19,7 @@ The package currently includes the following Actions:
 - `convert_coco_annotations`: Convert COCO annotations to Roboto-supported annotation format.
 - `parse_rosout_and_tag`: Check /rosout topic for certain strings and tag dataset.
 - `rosbag_reindex`: Reindex any unindexed rosbags.
+- `extract_files`: Extract zip, tar or tar.gz files.
 
 # Prerequisites
 
