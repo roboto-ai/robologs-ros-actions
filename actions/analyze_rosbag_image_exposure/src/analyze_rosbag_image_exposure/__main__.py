@@ -1,7 +1,7 @@
 import argparse
 from glob import glob
 import os
-import pathlib
+from pathlib import Path
 import sys
 import shutil
 
@@ -46,13 +46,36 @@ def load_env_var(env_var: RobotoEnvKey, strict=True) -> Union[str, None]:
             return None
     return value
 
+def setup_env():
+    # get dataset info from roboto env if it exists
+    # handle runs outside the Roboto platform by filtering on whether invocation id exists
+    invocation_id = load_env_var(RobotoEnvKey.InvocationId, strict=False)
+
+    # If inside an invocation, get info for file-level tagging
+    if invocation_id:
+        service_url = load_env_var(RobotoEnvKey.RobotoServiceUrl)
+        # Setup and authorize HTTP client
+        client = HttpClient(default_auth=SigV4AuthDecorator("execute-api"))
+        service_url = load_env_var(RobotoEnvKey.RobotoServiceUrl)
+
+        delegate = http_delegates.HttpDelegates.from_client(http=client, endpoint=service_url)
+        invocation = actions.invocation.Invocation.from_id(invocation_id, delegate.invocations)
+        dataset_id = invocation.data_source.data_source_id
+        transaction_manager = TransactionManager(service_url, client)
+
+        dataset = datasets.dataset.Dataset.from_id(dataset_id, dataset_delegate=delegate.datasets, file_delegate=delegate.files, transaction_manager=transaction_manager)
+    else:
+        dataset = None
+
+    return {"dataset": dataset}
+
 def main(
     input_file_or_folder: str,
     output_folder: str,
     manifest: bool = True,
     topics: Optional[str] = None,
     bins: int = 15,
-    extract_all_images: Optional[bool] = False,
+    extract_all_images: bool=False,
 ) -> None:
     """
     Extract images from a Rosbag1 format.
@@ -69,25 +92,9 @@ def main(
     """
 
     # Roboto dataset setup
-    invocation_id = load_env_var(RobotoEnvKey.InvocationId, strict=False)
-    service_url = load_env_var(RobotoEnvKey.RobotoServiceUrl, strict=False)
-
-    # If inside an invocation, get info for file-level tagging
-    if invocation_id:
-        assert service_url is not None, "Error: invocation exists but no service url"
-        # Setup and authorize HTTP client
-        client = HttpClient(default_auth=SigV4AuthDecorator("execute-api"))
-        service_url = load_env_var(RobotoEnvKey.RobotoServiceUrl)
-
-        delegate = http_delegates.HttpDelegates.from_client(http=client, endpoint=service_url)
-        invocation = actions.invocation.Invocation.from_id(invocation_id, delegate.invocations)
-        dataset_id = invocation.data_source.data_source_id
-        transaction_manager = TransactionManager(service_url, client)
-
-        dataset = datasets.dataset.Dataset.from_id(dataset_id, dataset_delegate=delegate.datasets, file_delegate=delegate.files, transaction_manager=transaction_manager)
-    else:
-        dataset = None
     topics_list = topics.split(",") if topics else None
+    roboto_objects = setup_env()
+    dataset = roboto_objects["dataset"]
 
     if os.path.isdir(input_file_or_folder):
         rosbag_files = file_utils.get_all_files_of_type_in_directory(
@@ -123,9 +130,9 @@ def main(
     # analyze exposure of images in output directory
     # iterate through each rosbag folder folder first
 
-    output_root = pathlib.Path(output_folder)
+    output_root = Path(output_folder)
     # bag output folers share the name of their input bags
-    rosbag_names = [pathlib.Path(p).stem for p in rosbag_files]
+    rosbag_names = [Path(p).stem for p in rosbag_files]
 
     bag_out_folders = [p for p in output_root.iterdir() if p.is_dir() and p.name in rosbag_names]
         
@@ -133,96 +140,125 @@ def main(
     # to enable tagging at the file level
     if dataset and extract_all_images:
         FileManager = FilesChangesetFileManager()
+    else:
+        FileManager = None
 
     # enumerate all image paths
     for bag_folder in bag_out_folders:
-        bag_put_tags = []
-        all_img_paths = []
-        for img_ext in ["jpg", "JPG", "JPEG", "png", "PNG"]:
-            all_img_paths.extend(glob(f"**/*.{img_ext}", root_dir=str(bag_folder), recursive=True))
+        tag_bag_output_exposures(
+                bag_out_folder=bag_folder,
+                output_root=output_root,
+                bins=bins,
+                dataset_obj=dataset,
+                file_manager_obj=FileManager,
+                extract_all_images=extract_all_images,
+                max_n_examples=5
+                )
 
-        if len(all_img_paths) == 0:
-            logger.warning(f"No image files extracted from {bag_folder.name}.bag.")
-    
-        overexposed_images = []
-        underexposed_images = []
-        good_images = []
-        for img_path in all_img_paths:
+def tag_bag_output_exposures(
+    bag_out_folder: Path,
+    output_root: Path,
+    bins: int,
+    dataset_obj: Optional[datasets.Dataset]=None,
+    file_manager_obj: Optional[FilesChangesetFileManager]=None,
+    extract_all_images: bool=True,
+    max_n_examples: int=5
+    ):
+    """
+    Iterate through all images in a directory created by extracting images from a Rosbag1
+    analyze their relative overexposure or underexposure using the histogram mode method
+    if 
+    """
 
-            # read in image in grayscale mode
-            img = cv2.imread(str(bag_folder / img_path), cv2.IMREAD_GRAYSCALE)
-            
-            # take a histogram of the image. By default we take 15 bins
-            hist = np.histogram(img, bins=bins, range=(0., 255.))[0]
-            largest_bin = np.argmax(hist)
-            
-            # add a file-level tag if image is over or underexposed
-            # images with most intensity at the bottom of the histogram are underexposed
-            if largest_bin == 0:
-                put_tag = "underexposed"
-                underexposed_images.append(img_path)
-            # images with most intensity at the top of the histogram are overexposed
-            elif largest_bin == bins - 1:
-                put_tag = "overexposed"
-                overexposed_images.append(img_path)
-            else:
-                put_tag = False
-                good_images.append(img_path)
-            
-            if put_tag:
-                bag_put_tags.append(put_tag)
-                if dataset and extract_all_images:
-                    print(f"putting tag {put_tag} on imag {img_path}")
-                    FileManager.put_tags(f"{bag_folder.name}/{img_path}", [put_tag])
+    bag_put_tags = {"overexposed":False, "underexposed": False}
+    all_img_paths = []
+    for img_ext in ["jpg", "JPG", "JPEG", "png", "PNG"]:
+        all_img_paths.extend(glob(f"**/*.{img_ext}", root_dir=str(bag_out_folder), recursive=True))
 
+    if len(all_img_paths) == 0:
+        logger.warning(f"No image files extracted from {bag_out_folder.name}.bag.")
 
-        # put tags on rosbag if dataset is not None and put_tags exist
-        if dataset: 
-            if bag_put_tags:
-                #bag_fname = pathlib.Path(input_file_or_folder) / f"{bag_folder.name}.bag"
-                bag_fname = f"{bag_folder.name}.bag"
-                # build a MetadataChangeset with put_tag direction
-                changeset = updates.MetadataChangeset().Builder()
-                # put tags on the Changeset builder one at a time
-                for tag in set(bag_put_tags): # only tag dataset with each tag value once
+    overexposed_images = []
+    underexposed_images = []
+    good_images = []
+    # iterate through all images under the output directory
+    for img_path in all_img_paths:
+        # read in image in grayscale mode
+        img = cv2.imread(str(bag_out_folder / img_path), cv2.IMREAD_GRAYSCALE)
+        
+        # take a histogram of the image. By default we take 15 bins
+        hist = np.histogram(img, bins=bins, range=(0., 255.))[0]
+        largest_bin = np.argmax(hist)
+        
+        # add a file-level tag if image is over or underexposed
+        # set rosbag-level tag for overexposure or underexposure as well
+
+        # images with most intensity at the bottom of the histogram are underexposed
+        if largest_bin == 0:
+            underexposed_images.append(img_path)
+            bag_put_tags["underexposed"] = True
+            file_level_tag = "underexposed"
+
+        # images with most intensity at the top of the histogram are overexposed
+        elif largest_bin == bins - 1:
+            overexposed_images.append(img_path)
+            bag_put_tags["overexposed"] = True
+            file_level_tag = "overexposed"
+        else:
+            good_images.append(img_path)
+            file_level_tag = False
+        if file_level_tag:
+            if dataset_obj and extract_all_images and file_manager_obj:
+                logger.info(f"putting tag {file_level_tag} on image {img_path}")
+                file_manager_obj.put_tags(f"{bag_out_folder.name}/{img_path}", [file_level_tag])
+
+    # put tags on rosbag if dataset is not None and put_tags exist
+    if dataset_obj: 
+        if bag_put_tags:
+            bag_fname = f"{bag_out_folder.name}.bag"
+            # build a MetadataChangeset with put_tag direction
+            changeset = updates.MetadataChangeset().Builder()
+            # put tags on the Changeset builder one at a time
+            for tag, value in bag_put_tags.items():
+                if value:
                     changeset = changeset.put_tag(tag)
-                changeset = changeset.build()
-                bag_file = dataset.get_file_info(bag_fname)
-                file_update_request = files.file_requests.UpdateFileRecordRequest(metadata_changeset = changeset)
-                # pass request to add metadata
-                bag_file = bag_file.update(file_update_request)
-                logger.info(f"Tagging {bag_fname} with {bag_put_tags}")
+            changeset = changeset.build()
+            bag_file = dataset_obj.get_file_info(bag_fname)
+            file_update_request = files.file_requests.UpdateFileRecordRequest(metadata_changeset = changeset)
+            # pass request to add metadata
+            bag_file = bag_file.update(file_update_request)
+            logger.info(f"Tagging {bag_fname} with {bag_put_tags}")
 
-        # save some example images, max 5 for each of over and underexposed
-        max_overex_examples = min(len(overexposed_images), 5)
-        overexposed_examples = overexposed_images[:max_overex_examples]
+    # save some example images, max 5 for each of over and underexposed
+    max_overex_examples = min(len(overexposed_images), max_n_examples)
+    overexposed_examples = overexposed_images[:max_overex_examples]
 
-        if overexposed_examples:
-            overexposed_outputs = output_root / f"{bag_folder.name}_overexposed_examples"
-            overexposed_outputs.mkdir(parents=True,exist_ok=True)
+    if overexposed_examples:
+        overexposed_outputs = output_root / f"{bag_out_folder.name}_overexposed_examples"
+        overexposed_outputs.mkdir(parents=True,exist_ok=True)
+
+    # copy overexposed example images to output example dir
+        for img_path in overexposed_examples:
+            shutil.copy(bag_out_folder / img_path, overexposed_outputs / Path(img_path).name)
+    
+
+    max_underex_examples = min(len(underexposed_images), max_n_examples)
+    underexposed_examples = underexposed_images[:max_underex_examples]
+    if underexposed_examples:
+        underexposed_outputs = output_root / f"{bag_out_folder.name}_underexposed_examples"
+        underexposed_outputs.mkdir(parents=True, exist_ok=True)
 
         # copy overexposed example images to output example dir
-            for img_path in overexposed_examples:
-                shutil.copy(bag_folder / img_path, overexposed_outputs / pathlib.Path(img_path).name)
-        
-
-        max_underex_examples = min(len(underexposed_images), 5)
-        underexposed_examples = underexposed_images[:max_underex_examples]
-        if underexposed_examples:
-            underexposed_outputs = output_root / f"{bag_folder.name}_underexposed_examples"
-            underexposed_outputs.mkdir(parents=True, exist_ok=True)
-
-            # copy overexposed example images to output example dir
-            for img_path in underexposed_examples:
-                shutil.copy(bag_folder / img_path, underexposed_outputs / pathlib.Path(img_path).name)
-        
-        if not extract_all_images:
-            # remove output bag of images that aren't examples
-            shutil.rmtree(bag_folder)
-        else:
-            # apply updates from File Metadata Manager to dataset
-            if dataset:
-                FileManager.apply_to_dataset(dataset)
+        for img_path in underexposed_examples:
+            shutil.copy(bag_out_folder / img_path, underexposed_outputs / Path(img_path).name)
+    
+    if not extract_all_images:
+        # remove output bag of images that aren't examples
+        shutil.rmtree(bag_out_folder)
+    else:
+        # apply updates from File Metadata Manager to dataset
+        if dataset_obj and file_manager_obj:
+            file_manager_obj.apply_to_dataset(dataset_obj)
 
 def process_rosbag(
     rosbag_path: str,
@@ -265,7 +301,7 @@ parser.add_argument(
     "-i",
     "--input-dir",
     dest="input_dir",
-    type=pathlib.Path,
+    type=Path,
     required=False,
     help="Directory containing input files to process",
     default=load_env_var(RobotoEnvKey.InputDir),
@@ -274,7 +310,7 @@ parser.add_argument(
     "-o",
     "--output-dir",
     dest="output_dir",
-    type=pathlib.Path,
+    type=Path,
     required=False,
     help="Directory to which to write any output files to be uploaded",
     default=load_env_var(RobotoEnvKey.OutputDir),
