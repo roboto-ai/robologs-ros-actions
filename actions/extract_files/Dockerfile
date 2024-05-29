@@ -1,4 +1,9 @@
-FROM --platform=linux/amd64 public.ecr.aws/docker/library/busybox
+FROM --platform=linux/amd64 ubuntu:22.04
+
+RUN \
+apt-get update && \
+apt-get install unzip -y && \
+rm -rf /var/lib/apt/lists/*
 
 COPY src/main.sh /main.sh
 
