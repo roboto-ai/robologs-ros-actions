@@ -334,10 +334,18 @@ parser.add_argument(
 
 parser.add_argument(
     "--bins",
-    type=str,
+    type=int,
     required=False,
     help="Number of bins in image intensity histogram for analyzing exposure",
     default=os.environ.get("ROBOTO_PARAM_BINS"),
+)
+
+parser.add_argument(
+    "--max_n_examples",
+    type=int,
+    required=False,
+    help="Maximum number of example images to save for over- and underexposure",
+    default=(os.environ.get("ROBOTO_PARAM_MAX_N_EXAMPLES") == "True"),
 )
 
 parser.add_argument(

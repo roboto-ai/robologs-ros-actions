@@ -19,6 +19,11 @@
 	    "required":"false",
 	    "description": "Number of bins in image intensity histogram for exposure analysis"
 	},
+	{
+	    "name":"MAX_N_EXAMPLES",
+	    "required":"false",
+	    "description": "Maximum number of example over- or underexposed images to save (separate from full extraction)"
+	},
         {
             "name": "EXTRACT_ALL_IMAGES",
             "required": false,
