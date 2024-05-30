@@ -7,7 +7,7 @@
             "name": "ISOLATE_EXTRACTION",
             "required": "false",
             "description": "Set to True to create a separate output folder for each zip, tar, tar.gz file.",
-            "default": "True"
+            "default": "False"
         }
     ],
     "compute_requirements": {
