@@ -1,4 +1,4 @@
-# What is robologs-ros-actions
+# robologs-ros-actions
 
 `robologs-ros-actions` is an open-source collection of software modules to extract, process and analyze Robot Operating System (ROS) data. These modules, referred to as Actions, are essentially containerized Python scripts, and form part of the broader [robologs](https://github.com/roboto-ai/robologs) library.
 
