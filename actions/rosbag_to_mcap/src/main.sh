@@ -39,10 +39,19 @@ fi
 # Loop over .bag files in the input directory and its subdirectories
 find "$input_directory" -type f -name "*.bag" | while read -r bag_file
 do
+    # Get the relative path of the bag file from the input directory
+    relative_path="${bag_file#$input_directory/}"
+
     # Get the base name of the bag file
-    base_name=$(basename "$bag_file" .bag)
+    base_name=$(basename "$relative_path" .bag)
+
+    # Get the directory of the relative path (excluding the file name)
+    relative_dir=$(dirname "$relative_path")
+
+    # Create the corresponding directory in the output directory
+    mkdir -p "$output_directory/$relative_dir"
 
     # Run the conversion command
-    echo "Converting $bag_file to $base_name.mcap"
-    mcap convert "$bag_file" "$output_directory/$base_name.mcap"
+    echo "Converting $bag_file to $output_directory/$relative_dir/$base_name.mcap"
+    mcap convert "$bag_file" "$output_directory/$relative_dir/$base_name.mcap"
 done

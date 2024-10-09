@@ -9,7 +9,7 @@ ORG=${ORG}
 
 # Check for command line argument for ORG, fallback to roboto-public if not provided
 if [ -z "$1" ]; then
-  ORG="roboto-public"
+  ORG="og_p98ueaxs7gxq"
 else
   ORG=$1
 fi
