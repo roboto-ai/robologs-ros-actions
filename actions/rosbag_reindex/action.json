@@ -1,14 +1,7 @@
 {
     "name": "rosbag_reindex",
-    "short_description": "Reindex any unindexed rosbags.",
-    "description": "This Action reindexes any unindexed rosbags.",
-    "parameters": [
-        {
-            "name": "FILE_PATH",
-            "required": "false",
-            "description": "Path relative to input directory of .bag file to be reindexed. If not set, all .bag will be reindexed (if necessary)."
-        }
-    ],
+    "short_description": "Reindex .bag.active files created due to unexpected interruptions.",
+    "description": "This Action scans input directories for .bag.active files, created when a rosbag process is interrupted (e.g., due to system shutdown or failure), and reindexes them using 'rosbag reindex'. The resulting .bag files are saved alongside the originals. Reindexing is essential to recover data from incomplete recordings.",
     "compute_requirements": {
         "vCPU": 512,
         "memory": 1024,
@@ -17,5 +10,5 @@
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/rosbag_reindex"
     },
-    "tags": ["ros"]
+    "tags": ["ROS1"]
 }
