@@ -7,18 +7,12 @@ Actions can range from simple data transformations to more complex algorithms, a
 The package currently includes the following Actions:
 
 - `avi_to_mp4`: Convert .avi video files to .mp4.
-- `convert_coco_annotations`: Convert COCO annotations to Roboto-supported annotation format.
 - `extract_files`: Extract zip, tar or tar.gz files.
-- `get_images_from_rosbag`: Extract images from a rosbag.
-- `get_images_from_videos`: Extract images from video formats.
 - `get_videos_from_rosbag`: Extract videos from a rosbag.
 - `merge_rosbags`: Merge multiple rosbag files into a single file.
-- `parse_rosout_and_tag`: Parse /rosout topic for certain strings and tag datasets.
 - `rosbag_reindex`: Reindex any unindexed rosbags.
-- `rosbag_to_csv`: Convert a rosbag to a CSV file.
 - `rosbag_to_mcap`: Convert a rosbag to an MCAP file.
 - `run_svo_slam_rosbag`: Run the [SVO SLAM](https://github.com/uzh-rpg/rpg_svo_pro_open) algorithm on a rosbag.
-- `run_yolov8_images`: Run the YOLOv8 object detection algorithm on a folder of images.
 - `run_yolov8_rosbag`: Run the YOLOv8 object detection algorithm on a rosbag.
 
 # Prerequisites

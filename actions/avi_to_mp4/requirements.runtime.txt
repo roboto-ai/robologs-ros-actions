@@ -1,2 +1,2 @@
 # Python packages to install within the Docker image associated with this Action.
-roboto==0.2.16
+roboto==0.11.2
