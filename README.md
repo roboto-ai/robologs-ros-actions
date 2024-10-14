@@ -9,6 +9,7 @@ The package currently includes the following Actions:
 - `avi_to_mp4`: Convert .avi video files to .mp4.
 - `extract_files`: Extract zip, tar or tar.gz files.
 - `merge_rosbags`: Merge multiple rosbag files into a single file.
+- `get_videos_from_rosbag`: Extract videos from a rosbag.
 - `rosbag_reindex`: Reindex any unindexed rosbags.
 - `rosbag_to_mcap`: Convert a rosbag to an MCAP file.
 - `run_svo_slam_rosbag`: Run the [SVO SLAM](https://github.com/uzh-rpg/rpg_svo_pro_open) algorithm on a rosbag.
