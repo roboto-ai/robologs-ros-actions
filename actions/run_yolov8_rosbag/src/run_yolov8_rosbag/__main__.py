@@ -8,7 +8,6 @@ import cv2
 from typing import Optional, List, Tuple, Union
 
 from roboto.domain import actions
-from roboto.env import RobotoEnvKey
 from robologs_ros_utils.sources.ros1 import argument_parsers, ros_utils, ros_img_tools
 from robologs_ros_utils.utils import file_utils
 from ultralytics import YOLO
@@ -337,7 +336,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory containing input files to process",
-    default=os.environ.get(RobotoEnvKey.InputDir.value),
+    default=os.environ.get("ROBOTO_INPUT_DIR"),
 )
 parser.add_argument(
     "-o",
@@ -346,7 +345,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory to which to write any output files to be uploaded",
-    default=os.environ.get(RobotoEnvKey.OutputDir.value),
+    default=os.environ.get("ROBOTO_OUTPUT_DIR"),
 )
 
 parser.add_argument(
