@@ -37,4 +37,4 @@ docker run --rm -it \
     -v $output_dir:/output \
     -e ROBOTO_INPUT_DIR=/input \
     -e ROBOTO_OUTPUT_DIR=/output \
-    convert_coco_annotations:latest
+    get_images_from_rosbag:latest

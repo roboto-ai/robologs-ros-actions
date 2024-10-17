@@ -11,4 +11,4 @@ if docker buildx version &> /dev/null; then
     build_subcommand=(buildx build --platform linux/amd64 --output type=image)
 fi
 
-docker "${build_subcommand[@]}" -f $PACKAGE_ROOT/Dockerfile -t convert_coco_annotations:latest $PACKAGE_ROOT
+docker "${build_subcommand[@]}" -f $PACKAGE_ROOT/Dockerfile -t get_images_from_rosbag:latest $PACKAGE_ROOT

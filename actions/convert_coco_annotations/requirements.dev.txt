@@ -1,7 +1,0 @@
-# Python packages to install into the this directory's virtual environment
-# for the purpose of development, testing, and deployment.
-
-# Install all required runtime dependencies in local virtual environment.
--r requirements.runtime.txt
-
-# Add additional Python packages to install here.

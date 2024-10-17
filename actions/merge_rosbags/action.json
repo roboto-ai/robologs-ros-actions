@@ -24,7 +24,7 @@
         "memory": "8192",
         "vCPU": "2048"
     },
-    "tags": ["ros"],
+    "tags": ["ROS1"],
     "metadata": {
         "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/merge_rosbags"
     }

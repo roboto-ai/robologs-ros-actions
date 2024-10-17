@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-ACTION_NAME=convert_coco_annotations
-INPUT_FILE_PATH="./test/input/example_annotations.coco.json"
-EXPECTED_OUTPUT_FILE_NAME="detections.json"
-INPUT_DATA="*json"
+ACTION_NAME=get_images_from_rosbag
+INPUT_FILE_PATH="./test/input/tiny.bag"
+EXPECTED_OUTPUT_FILE_NAME="dvs_image_raw_000000.jpg"
+INPUT_DATA="*bag"
 ORG=${ORG}
 
 # Check for command line argument for ORG, fallback to roboto-public if not provided

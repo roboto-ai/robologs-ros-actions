@@ -1,7 +1,7 @@
 {
-    "name": "get_videos_from_rosbag",
-    "short_description": "Create videos from a rosbag.",
-    "description": "This Action creates videos from a rosbag.\n\nBy default, all image topics are extracted into separate videos, but you can optionally specify a list of topics to extract instead.",
+    "name": "get_images_from_rosbag",
+    "short_description": "Extract images from a rosbag.",
+    "description": "This Action extracts images from a rosbag and can optionally create a video.\n\nBy default, all image topics are extracted, but you can optionally specify a list of topics to extract instead.",
     "parameters": [
         {
             "name": "FORMAT",
@@ -49,8 +49,7 @@
         {
             "name": "SAVE_VIDEO",
             "required": false,
-            "description": "Set True to save videos",
-            "default": "True"
+            "description": "Set True to save videos"
         },
         {
             "name": "KEEP_IMAGES",
@@ -64,6 +63,6 @@
     },
     "tags": ["ROS1"],
     "metadata": {
-        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/get_videos_from_rosbag"
+        "github_url": "https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/get_images_from_rosbag"
     }
 }
