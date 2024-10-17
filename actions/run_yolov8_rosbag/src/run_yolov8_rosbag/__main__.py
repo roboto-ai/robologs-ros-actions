@@ -5,10 +5,11 @@ import json
 import shutil
 import datetime
 import cv2
-from typing import Optional, List, Tuple, Union
+from typing import Optional, List, Tuple, Union, Dict, Any
 
-from roboto.domain import actions
-from roboto.env import RobotoEnvKey
+from roboto import ActionRuntime
+from roboto import Dataset, RobotoClient
+
 from robologs_ros_utils.sources.ros1 import argument_parsers, ros_utils, ros_img_tools
 from robologs_ros_utils.utils import file_utils
 from ultralytics import YOLO
@@ -26,6 +27,57 @@ ALLOWED_MODELS = [
     "yolov8l-seg",
     "yolov8x-seg",
 ]
+
+
+def count_detections(detections_data: Dict[str, Any]) -> Dict[str, int]:
+    """
+    Takes a dictionary containing image detections and returns a dictionary
+    with the count of how many times each object has been detected.
+
+    Args:
+        detections_data (Dict[str, Any]): A dictionary containing the detection data,
+                                          structured similarly to the contents of 'detections.json'.
+
+    Returns:
+        Dict[str, int]: A dictionary where the keys are object names (e.g., "car", "person")
+                        and the values are the total counts of detections for each object.
+    """
+    # Initialize an empty dictionary to store the counts
+    detection_counts: Dict[str, int] = {}
+
+    # Loop through the images in the JSON
+    for image, detections in detections_data["images"].items():
+        # Loop through each detection in the image
+        for detection in detections:
+            object_name = detection["name"]
+            # Increment the count for each detected object
+            if object_name in detection_counts:
+                detection_counts[object_name] += 1
+            else:
+                detection_counts[object_name] = 1
+
+    return detection_counts
+
+
+def add_object_counts(dict1: Dict[str, int], dict2: Dict[str, int]) -> Dict[str, int]:
+    """
+    Adds the counts of objects from two dictionaries. If an object is present in both dictionaries,
+    their counts are summed. If an object is present in only one dictionary, its count is added as is.
+
+    Args:
+        dict1 (Dict[str, int]): The first dictionary containing object counts.
+        dict2 (Dict[str, int]): The second dictionary containing object counts.
+
+    Returns:
+        Dict[str, int]: A new dictionary with the combined object counts from both input dictionaries.
+    """
+    combined_dict = dict1.copy()  # Start with a copy of the first dictionary
+    for key, value in dict2.items():
+        if key in combined_dict:
+            combined_dict[key] += value  # Add the values if the key exists
+        else:
+            combined_dict[key] = value  # Otherwise, add the new key
+    return combined_dict
 
 
 def get_images(
@@ -169,9 +221,16 @@ def run_detector_on_folders(
     """
     temp_dir = os.path.join(root_output_folder, "temp_imgs") if save_video else None
 
+    runtime = ActionRuntime.from_env()
+    dataset_id = runtime.dataset_id
+    dataset = Dataset.from_id(dataset_id=str(dataset_id),
+                              roboto_client=RobotoClient.from_env())
+
     # Iterate over directories
     for bag_dir in os.listdir(root_output_folder):
         bag_path = os.path.join(root_output_folder, bag_dir)
+
+        object_count_dict = {}
 
         # Process topic directories inside the bag's output folder
         if os.path.isdir(bag_path):
@@ -180,14 +239,29 @@ def run_detector_on_folders(
                 if save_video:
                     os.makedirs(temp_dir, exist_ok=True)
 
-                process_topic_directory(
+                detection_count=process_topic_directory(
                     topic_dir=topic_dir,
                     bag_path=bag_path,
                     model_name=model_name,
                     visualize=visualize,
                     save_video=save_video,
-                    temp_dir=temp_dir,
-                )
+                    temp_dir=temp_dir)
+
+                if detection_count:
+                    object_count_dict=add_object_counts(object_count_dict, detection_count)
+
+            # Add metadata logic
+            print("object_count_dict")
+            print(object_count_dict)
+            if object_count_dict:
+                bag_file = bag_dir + ".bag"
+                try:
+                    print("Adding metadata to bag file {}".format(bag_file))
+                    file_record = dataset.get_file_by_path(bag_file)
+                    file_record.put_metadata(metadata=object_count_dict)
+                except Exception as e:
+                    print("Error adding metadata to bag file {}: {}".format(bag_file, e))
+                    continue
 
 
 def process_topic_directory(
@@ -197,7 +271,7 @@ def process_topic_directory(
     visualize: bool,
     save_video: bool,
     temp_dir: Optional[str],
-) -> None:
+) -> Dict[str, int]:
     """
     Helper function to process a given topic directory.
 
@@ -243,6 +317,8 @@ def process_topic_directory(
         if save_video:
             cv2.imwrite(os.path.join(temp_dir, image_data["img_name"]), img)
 
+    detection_count = count_detections(detections)
+
     # Save detections to file
     with open(os.path.join(topic_path, "detections.json"), "w") as f:
         json.dump(detections, f, indent=4)
@@ -256,6 +332,7 @@ def process_topic_directory(
         shutil.rmtree(temp_dir)
 
     move_images_to_subfolder(topic_path)
+    return detection_count
 
 
 def move_images_to_subfolder(topic_path: str) -> None:
@@ -337,7 +414,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory containing input files to process",
-    default=os.environ.get(RobotoEnvKey.InputDir.value),
+    default=os.environ.get("ROBOTO_INPUT_DIR"),
 )
 parser.add_argument(
     "-o",
@@ -346,7 +423,7 @@ parser.add_argument(
     type=pathlib.Path,
     required=False,
     help="Directory to which to write any output files to be uploaded",
-    default=os.environ.get(RobotoEnvKey.OutputDir.value),
+    default=os.environ.get("ROBOTO_OUTPUT_DIR"),
 )
 
 parser.add_argument(
