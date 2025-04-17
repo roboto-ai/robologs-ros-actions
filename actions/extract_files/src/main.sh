@@ -17,7 +17,7 @@ create_output_dir() {
     if [[ "$ROBOTO_PARAM_ISOLATE_EXTRACTION" == "True" ]]; then
         # Strip the extension and append _dir
         local base_name_no_ext="${base_name%.*}"
-        output_dir="$output_dir/$dir_name/${base_name_no_ext}_dir"
+        output_dir="$output_dir/$dir_name/${base_name_no_ext}"
     else
         output_dir="$output_dir/$dir_name"
     fi
