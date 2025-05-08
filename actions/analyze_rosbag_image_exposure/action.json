@@ -1,0 +1,41 @@
+{
+    "name": "analyze_rosbag_image_exposure",
+    "short_description": "Extract images from a rosbag and tag overexposed or underexposed.",
+    "description": "This Action extracts images from a rosbag and tags those rosbags (and optionally individual images) that are overexposed or underexposed.",
+    "parameters": [
+        {
+            "name": "MANIFEST",
+            "required": false,
+            "description": "Whether to save an image manifest json file",
+            "default": "True"
+        },
+        {
+            "name": "TOPICS",
+            "required": "false",
+            "description": "Comma-separated list of topics. If empty, all image topics are extracted"
+        },
+	{
+	    "name":"BINS",
+	    "required":"false",
+	    "description": "Number of bins in image intensity histogram for exposure analysis"
+	},
+	{
+	    "name":"MAX_N_EXAMPLES",
+	    "required":"false",
+	    "description": "Maximum number of example over- or underexposed images to save (separate from full extraction)"
+	},
+        {
+            "name": "EXTRACT_ALL_IMAGES",
+            "required": false,
+            "description": "Set True to extract all images and tag with file-level metadata."
+        }
+    ],
+    "compute_requirements": {
+        "memory": "8192",
+        "vCPU": "2048"
+    },
+    "tags": ["ros"],
+    "metadata": {
+        "github_url":"https://github.com/roboto-ai/robologs-ros-actions/tree/main/actions/analyze_rosbag_image_exposure" 
+    }
+}

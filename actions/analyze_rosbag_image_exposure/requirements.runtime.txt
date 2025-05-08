@@ -1,0 +1,6 @@
+# Python packages to install within the Docker image associated with this Action.
+roboto==0.3.0
+--extra-index-url https://test.pypi.org/simple/
+robologs-ros-utils==0.1.1a76
+opencv-python
+numpy
