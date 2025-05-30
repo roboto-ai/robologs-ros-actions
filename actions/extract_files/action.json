@@ -1,7 +1,7 @@
 {
     "name": "extract_files",
     "short_description": "Extract data from compressed or archive file formats such as tar and zip.",
-    "description": "This Action handles the extraction of data stored in compressed or archive file formats. It supports both tar and zip formats.",
+    "description": "This Action handles the extraction of data stored in compressed or archive file formats. It supports .zip, .tar, .tar.gz, .tgz and .tar.xz.",
     "parameters": [
         {
             "name": "ISOLATE_EXTRACTION",
