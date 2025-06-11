@@ -24,8 +24,17 @@ create_output_dir() {
     echo "$output_dir"
 }
 
-# Process supported archive types
-find "$ROBOTO_INPUT_DIR" -type f \( -name "*.zip" -o -name "*.tar" -o -name "*.tar.gz" -o -name "*.tgz" -o -name "*.tar.xz" \) | while IFS= read -r file; do
+# Find supported archive files
+mapfile -t archive_files < <(find "$ROBOTO_INPUT_DIR" -type f \( -name "*.zip" -o -name "*.tar" -o -name "*.tar.gz" -o -name "*.tgz" -o -name "*.tar.xz" \))
+
+# Fail and exit if no archives are found
+if [[ ${#archive_files[@]} -eq 0 ]]; then
+    echo "Error: No supported archive files found in \$ROBOTO_INPUT_DIR ($ROBOTO_INPUT_DIR)" >&2
+    exit 1
+fi
+
+# Process each archive
+for file in "${archive_files[@]}"; do
     output_dir=$(create_output_dir "$file")
 
     echo "Extracting: $file -> $output_dir"
